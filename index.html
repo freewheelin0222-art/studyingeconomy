@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>工学系技術者の経済ノート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F5F0;
+    --ink:#1A2238;
+    --ink-soft:#4A5068;
+    --rule:#C9CBD3;
+    --blue:#2B4C7E;
+    --blue-dark:#223c63;
+    --red:#B4432F;
+    --tint:#E8EDF4;
+    --tint-warm:#EFEBE1;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit}
+  html{scroll-behavior:smooth;scroll-padding-top:2rem;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans JP",sans-serif;
+    font-weight:400;
+    line-height:1.85;
+    font-size:16px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#14171F;--ink:#E7E9EF;--ink-soft:#A7ADC0;
+      --rule:#333a4d;--blue:#8FB0DC;--blue-dark:#6f93c4;
+      --red:#E08066;--tint:#1E2430;--tint-warm:#1f2330;
+    }
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+
+  /* ---- hero ---- */
+  header.hero{
+    border-bottom:2px solid var(--ink);
+    padding:clamp(3rem,9vw,6rem) 0 clamp(1.8rem,4vw,2.6rem);
+    margin-bottom:clamp(2rem,5vw,3.5rem);
+  }
+  .kicker{
+    font-family:"Noto Serif JP",serif;
+    font-size:.9rem;color:var(--blue);letter-spacing:.04em;margin:0 0 1.1rem;
+  }
+  h1{
+    font-family:"Noto Serif JP",serif;font-weight:700;
+    font-size:clamp(2rem,6.5vw,3.4rem);line-height:1.2;margin:0 0 1.3rem;
+    letter-spacing:.01em;
+  }
+  .lede{font-size:clamp(1rem,2.4vw,1.12rem);color:var(--ink-soft);max-width:60ch;margin:0}
+  .meta-line{
+    display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;margin-top:1.8rem;
+    font-size:.85rem;color:var(--ink-soft);
+  }
+  .meta-line span{display:flex;align-items:baseline;gap:.4rem}
+  .meta-line b{color:var(--blue);font-weight:600}
+
+  /* ---- intro ---- */
+  .intro{margin-bottom:clamp(2.6rem,6vw,4rem)}
+  .intro p{margin:0 0 1.1rem;max-width:66ch}
+  .intro p:last-child{margin-bottom:0}
+
+  /* ---- section heading ---- */
+  .toc-head{
+    font-family:"Noto Serif JP",serif;font-weight:600;
+    font-size:1.05rem;color:var(--ink);
+    padding-bottom:.6rem;border-bottom:1px solid var(--rule);
+    margin:0 0 2rem;display:flex;align-items:baseline;justify-content:space-between;
+  }
+  .toc-head small{font-family:"Noto Sans JP";font-weight:400;color:var(--ink-soft);font-size:.8rem}
+
+  /* ---- chapter list ---- */
+  .chapters{display:flex;flex-direction:column;gap:0}
+  .chapter{
+    display:grid;grid-template-columns:3.2rem 1fr;gap:0 1.3rem;
+    padding:1.6rem 0;border-top:1px solid var(--rule);
+    text-decoration:none;color:inherit;
+    transition:background .18s ease;
+  }
+  .chapter:first-child{border-top:none}
+  .chapter:hover,.chapter:focus-visible{background:var(--tint);outline:none}
+  .chapter:hover .ch-title,.chapter:focus-visible .ch-title{color:var(--blue)}
+  .num{
+    font-family:"Noto Serif JP",serif;font-weight:700;
+    font-size:1.5rem;color:var(--blue);line-height:1.1;padding-top:.1rem;
+  }
+  .ch-body{min-width:0}
+  .ch-title{
+    font-family:"Noto Serif JP",serif;font-weight:600;
+    font-size:1.2rem;margin:0 0 .35rem;line-height:1.35;transition:color .18s ease;
+  }
+  .ch-desc{font-size:.92rem;color:var(--ink-soft);margin:0 0 .7rem;max-width:60ch}
+  .ch-topics{display:flex;flex-wrap:wrap;gap:.3rem .5rem;margin:0;padding:0;list-style:none}
+  .ch-topics li{
+    font-size:.78rem;color:var(--blue-dark);
+    background:var(--tint);border:1px solid var(--rule);
+    padding:.12rem .55rem;border-radius:2px;
+  }
+  .eng{
+    margin-top:.85rem;padding-left:.9rem;border-left:2px solid var(--red);
+    font-size:.84rem;color:var(--ink-soft);
+  }
+  .eng b{color:var(--red);font-weight:600;font-size:.78rem}
+
+  /* ---- closing ---- */
+  .closing{
+    margin:clamp(3rem,7vw,4.5rem) 0 0;padding:clamp(1.6rem,4vw,2.4rem);
+    background:var(--tint-warm);border:1px solid var(--rule);
+  }
+  .closing h2{font-family:"Noto Serif JP",serif;font-weight:600;font-size:1.15rem;margin:0 0 .8rem}
+  .closing p{margin:0 0 .9rem;font-size:.95rem;color:var(--ink-soft);max-width:62ch}
+  .closing p:last-child{margin-bottom:0}
+
+  footer{
+    margin-top:clamp(2.5rem,6vw,4rem);padding:2rem 0 3rem;
+    border-top:2px solid var(--ink);
+    font-size:.82rem;color:var(--ink-soft);display:flex;flex-wrap:wrap;
+    gap:.5rem 1.5rem;justify-content:space-between;
+  }
+  .disclaimer{
+    margin-top:1.3rem;font-size:.78rem;color:var(--ink-soft);
+    line-height:1.7;max-width:70ch;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="kicker">工学系技術者のノート</p>
+    <h1>経済ノート</h1>
+    <p class="lede">希少性・価格・資本主義から、投資の基礎と行動経済学、そしてAI時代の論点まで。設備屋の視点で経済学を一から学び直した記録。</p>
+    <div class="meta-line">
+      <span>全<b>10</b>章</span>
+      <span>基礎理論 → 実践 → 総合</span>
+      <span>工学の比喩つき</span>
+    </div>
+  </header>
+
+  <section class="intro">
+    <p>ものづくりの現場では、資源には限りがあり、何かを選べば別の何かを諦める。予算も、電力も、人の時間も有限で、だからこそ優先順位をつける。経済学が最初に立てる問いは、これとまったく同じものだった。</p>
+    <p>このノートは、専門家ではない一人の技術者が、ニュースや身近な出来事をきっかけに経済学の土台を学び直した記録である。結論を押し付けるのではなく、考えるための道具を順番に並べることを目指した。各章には、設備や保全の仕事で培った視点からの補助線を添えている。</p>
+  </section>
+
+  <nav>
+    <p class="toc-head">目次<small>章をタップして移動</small></p>
+    <div class="chapters">
+
+      <a class="chapter" href="#ch1">
+        <span class="num">1</span>
+        <div class="ch-body">
+          <h3 class="ch-title">経済学とは何を考える学問か</h3>
+          <p class="ch-desc">「何が正しいか」ではなく「何を諦めるか」を扱う学問。希少性からすべてが始まる。</p>
+          <ul class="ch-topics"><li>希少性</li><li>機会費用</li><li>トレードオフ</li><li>ミクロとマクロ</li></ul>
+          <p class="eng"><b>工学の視点</b> 限られた予算で何を更新し、何を先送りするか。設計はいつも選択の学問だ。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch2">
+        <span class="num">2</span>
+        <div class="ch-body">
+          <h3 class="ch-title">価格はどう決まるか</h3>
+          <p class="ch-desc">需要と供給。価格が資源配分のシグナルとして働く仕組みと、増やせないものの価格。</p>
+          <ul class="ch-topics"><li>需要と供給</li><li>均衡価格</li><li>弾力性</li><li>希少性と価格</li></ul>
+          <p class="eng"><b>工学の視点</b> ボトルネック工程が生産量を決めるように、増やせない資源が価格を支配する。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch3">
+        <span class="num">3</span>
+        <div class="ch-body">
+          <h3 class="ch-title">市場と競争</h3>
+          <p class="ch-desc">利潤はなぜ競争で消えるのか。参入障壁の質には序列がある。</p>
+          <ul class="ch-topics"><li>完全競争</li><li>独占・寡占</li><li>参入障壁</li><li>障壁の序列</li></ul>
+          <p class="eng"><b>工学の視点</b> 資本で越えられる壁、時間でしか越えられない壁、暗黙知で守られた壁。強さが違う。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch4">
+        <span class="num">4</span>
+        <div class="ch-body">
+          <h3 class="ch-title">資本主義とは何か</h3>
+          <p class="ch-desc">私的所有・市場・資本蓄積という定義。「寿命」をめぐる古典的な論争。</p>
+          <ul class="ch-topics"><li>3つの定義</li><li>マルクス</li><li>シュンペーター</li><li>ケインズ</li><li>ピケティ</li></ul>
+          <p class="eng"><b>工学の視点</b> 古い設計前提のまま負荷をかけ続ける配管系。壊れるのか、改修できるのか。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch5">
+        <span class="num">5</span>
+        <div class="ch-body">
+          <h3 class="ch-title">成長・生産性・技術革新</h3>
+          <p class="ch-desc">経済成長の源泉とは何か。技術が価格を下げてきた歴史と、その逆説。</p>
+          <ul class="ch-topics"><li>生産性</li><li>成長の源泉</li><li>価格低下の歴史</li><li>ジェヴォンズのパラドックス</li></ul>
+          <p class="eng"><b>工学の視点</b> 効率化で単価が下がると、かえって総使用量が増える。省エネ機器を入れた現場でよく見る現象だ。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch6">
+        <span class="num">6</span>
+        <div class="ch-body">
+          <h3 class="ch-title">お金・分配・格差</h3>
+          <p class="ch-desc">リターンは労働と資本のどちらに向かうか。作っても買い手がいないという問題。</p>
+          <ul class="ch-topics"><li>所得と資本</li><li>過少消費</li><li>有効需要</li><li>再分配</li></ul>
+          <p class="eng"><b>工学の視点</b> 生産能力だけ上げても、需要という出口がなければ在庫が積み上がる。系はバランスで動く。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch7">
+        <span class="num">7</span>
+        <div class="ch-body">
+          <h3 class="ch-title">マクロ経済と政府の役割</h3>
+          <p class="ch-desc">GDP、インフレ、中央銀行。社会保障と人口動態、民主主義と「先送り」の構造。</p>
+          <ul class="ch-topics"><li>GDP・インフレ</li><li>中央銀行の独立性</li><li>賦課方式</li><li>先送りの力学</li></ul>
+          <p class="eng"><b>工学の視点</b> 予防保全は承認されにくく、事後対応は承認される。国家の制度更新も同じ癖を持つ。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch8">
+        <span class="num">8</span>
+        <div class="ch-body">
+          <h3 class="ch-title">投資の基礎理論</h3>
+          <p class="ch-desc">リスクとリターン、分散がなぜ効くか。「予測の正しさ」と「良いリターン」は別物だ。</p>
+          <ul class="ch-topics"><li>リスクとリターン</li><li>分散投資</li><li>インデックス</li><li>手数料というコスト</li></ul>
+          <p class="eng"><b>工学の視点</b> 冗長化はコストだが、単一故障点をなくす。ポートフォリオの分散も同じ設計思想だ。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch9">
+        <span class="num">9</span>
+        <div class="ch-body">
+          <h3 class="ch-title">行動経済学 ― 人はなぜ間違えるか</h3>
+          <p class="ch-desc">損失回避、時間割引、群衆心理。情報の頻度そのものが判断を歪める。</p>
+          <ul class="ch-topics"><li>損失回避</li><li>時間割引</li><li>群衆心理</li><li>情報頻度の罠</li></ul>
+          <p class="eng"><b>工学の視点</b> ノイズの多い計器を見続けると誤操作が増える。人の判断も、見る回数を減らすほうが安定する。</p>
+        </div>
+      </a>
+
+      <a class="chapter" href="#ch10">
+        <span class="num">10</span>
+        <div class="ch-body">
+          <h3 class="ch-title">AI時代の経済を考える</h3>
+          <p class="ch-desc">知能のコモディティ化。価値はどこへ移るのか。労働と分配の未来を、道具立てで考える。</p>
+          <ul class="ch-topics"><li>知能の低価格化</li><li>物理的ボトルネック</li><li>労働と分配</li><li>論点の整理</li></ul>
+          <p class="eng"><b>工学の視点</b> 複製できるものは安くなり、増やせないもの ― 電力・立地・熟練 ― の相対価値が上がる。</p>
+        </div>
+      </a>
+
+    </div>
+  </nav>
+
+  <section class="closing">
+    <h2>このノートの使い方</h2>
+    <p>第1章から第7章までが経済学の土台、第8章と第9章が投資と判断の実践、第10章がそれらを総合してAI時代を考える、という流れになっている。順番に読むと道具が積み上がるが、関心のある章から入っても構わない。</p>
+    <p>どの章も、特定の結論や銘柄を勧めるものではない。考えるための枠組みと、それを疑うための反対側の視点を、できるだけ対にして置くようにした。読んだあとに自分で判断できることが目的である。</p>
+  </section>
+
+  <p class="disclaimer">本ノートは一個人の学習記録であり、経済学の専門的な解説や、投資・金融・法務に関する助言を目的としたものではありません。内容には誤りや単純化が含まれる可能性があります。投資判断は各自の責任において、必要に応じて専門家に相談のうえ行ってください。</p>
+
+  <footer>
+    <span>工学系技術者のノート ／ 経済</span>
+    <span>学習記録 &middot; 随時更新</span>
+  </footer>
+
+</div>
+</body>
+</html>
